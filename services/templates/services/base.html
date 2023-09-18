@@ -1,0 +1,73 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'services/css/style.css' %}"/>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'services:title_services' %}">Services</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'services:list_appointment' %}">Список записи</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'services:list_services' %}">Список услуг</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Меню
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{#}">Добавить пост</a></li>
+                  <li><a class="dropdown-item" href="{% url 'services:create_services' %}">Добавить Услугу</a></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    {% block content %}
+
+    {% endblock content%}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+          // Находим все элементы выбора даты с классом 'date-picker'
+          $('.date-picker').each(function () {
+              // Получаем текущую дату
+              var today = new Date();
+              var yyyy = today.getFullYear();
+              var mm = String(today.getMonth() + 1).padStart(2, '0');
+              var dd = String(today.getDate()).padStart(2, '0');
+              var currentDate = yyyy + '-' + mm + '-' + dd;
+  
+              // Устанавливаем атрибуты 'min' и 'max' для запрета выбора прошедших дат
+              $(this).attr('min', currentDate);
+  
+              // Обрабатываем изменение значения даты
+              $(this).on('input', function () {
+                  if (this.value < currentDate) {
+                      $(this).addClass('disabled-date'); // Добавляем класс для закрашивания серым
+                      $(this).val(''); // Сбрасываем значение, если выбрана прошедшая дата
+                  } else {
+                      $(this).removeClass('disabled-date'); // Удаляем класс
+                  }
+              });
+          });
+      });
+    </script>
+  </body>
+</html>

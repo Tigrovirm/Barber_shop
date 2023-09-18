@@ -1,0 +1,65 @@
+{% extends "staffonly/base.html" %}
+
+{% block content %}
+  {% csrf_token %}
+  
+  <div class="container">
+    <form action="{% url 'blog:make_appointment' %}" method="post">
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-25">
+                <label for="service">Выбор услуги</label>
+            </div>
+            <div class="col-75">
+                <select id="service" name="service">
+                    {% for service in services %}
+                        <option value="{{ service.id }}">{{ service.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="master">Выбор мастера</label>
+            </div>
+            <div class="col-75">
+                <select id="master" name="master">
+                    {% for master in masters %}
+                        <option value="{{ master.id }}">{{ master.first_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-25">
+                <label for="date">Выбор даты</label>
+            </div>
+            <div class="col-75">
+                <input type="date" id="date" name="appointment_date" class="date-picker">
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-25">
+                <label for="time">Выбор времени</label>
+            </div>
+            <div class="col-75">
+                <select id="time" name="appointment_time" >
+                    {% for time_choice in time_choices %}
+                        <option value="{{ time_choice.0 }}">{{ time_choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+{% endblock content %}

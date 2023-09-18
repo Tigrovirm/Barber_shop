@@ -1,0 +1,23 @@
+{% extends "services/base.html" %}
+
+{% block content %}
+
+{% for service in services %}
+<div class="card" style="width: 18rem;">
+    {% if service.image %}
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{ service.title }}</h5>
+        <p class="card-text">{{ service.price|truncatechars:30 }}</p>
+      </div>
+    {% else %}
+    <div class="card-body">
+      <h5 class="card-title">{{ service.title }}</h5>
+      <p class="card-text">{{ service.price|truncatechars:30 }}</p>
+    </div>
+  </div>
+    {% endif %}
+    {% empty %}
+    <p>Новостей пока нету :)</p>
+{% endfor %}
+{% endblock content %}

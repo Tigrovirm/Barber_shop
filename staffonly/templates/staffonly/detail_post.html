@@ -1,0 +1,18 @@
+{% extends "staffonly/base.html" %}
+
+{% block content %}
+        Title:<p>{{ post.title }}</p>
+        Content:<p>{{ post.content }}</p>
+   
+        <form action="{% url 'staffonly:delete_post' post.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger">Удалить пост</button>  
+        </form>
+
+        <a href="{% url 'staffonly:edit_post' post.id %}">
+                <button type="button" class="btn btn-outline-secondary">
+                Изменить пост      
+                </button>
+        </a>
+        
+{% endblock content %}

@@ -1,0 +1,57 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+
+
+  {% csrf_token %}
+    <div class="container">
+      <form action="{% url 'blog:create_review' %}" method="post">
+        {% csrf_token %}
+      <div class="row">
+        <div class="col-25">
+          <label for="fname">Имя</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="fname" name="name" placeholder="Имя">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="fname">Телефон</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="fname" name="phone" placeholder="Телефон">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="subject">Контент</label>
+        </div>
+        <div class="col-75">
+          <textarea id="subject" name="content" placeholder="Конент" style="height:200px"></textarea>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-25">
+          <label for="fname">Оценка</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="fname" name="grade" placeholder="Оценка">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="fname">Мастер</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="fname" name="master" placeholder="Мастер">
+        </div>
+      </div>
+      <div class="row">
+        <input type="submit" value="Submit">
+      </div>
+      </form>
+    </div>
+
+    {% endblock content %}

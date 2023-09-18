@@ -1,0 +1,20 @@
+{% extends "services/base.html" %}
+
+{% block content %}
+        Master:<p>{{ appointment.master }}</p>
+        Service:<p>{{ appointment.service }}</p>
+        Date:<p>{{ appointment.appointment_date }}</p>
+        Time:<p>{{ appointment.appointment_time }}</p>
+   
+        <form action="{% url 'services:delete_appointment' appointment.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-danger">Удалить пост</button>  
+        </form>
+
+        <a href="{% url 'services:edit_appointment' appointment.id %}">
+                <button type="button" class="btn btn-outline-secondary">
+                Изменить пост      
+                </button>
+        </a>
+        
+{% endblock content %}

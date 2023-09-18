@@ -1,0 +1,13 @@
+{% extends "staffonly/base.html" %}
+
+{% block content %}
+<p>post.title</p>
+<p>post.content</p>
+<form action="{% url 'staffonly:edit_post' post.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Сохранить изменения</button>
+</form>
+
+
+{% endblock content %}

@@ -1,0 +1,11 @@
+{% extends "services/base.html" %}
+
+{% block content %}
+<form action="{% url 'services:edit_appointment' appointment.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Сохранить изменения</button>
+</form>
+
+
+{% endblock content %}

@@ -1,0 +1,33 @@
+{% extends "staffonly/base.html" %}
+
+{% block content %}
+
+
+  {% csrf_token %}
+    <div class="container">
+      <form action="{% url 'staffonly:create_post' %}" method="post">
+        {% csrf_token %}
+      <div class="row">
+        <div class="col-25">
+          <label for="fname">Заголовок</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="fname" name="title" placeholder="Заголовок">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="subject">Контент</label>
+        </div>
+        <div class="col-75">
+          <textarea id="subject" name="content" placeholder="Конент" style="height:200px"></textarea>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <input type="submit" value="Submit">
+      </div>
+      </form>
+    </div>
+
+    {% endblock content %}

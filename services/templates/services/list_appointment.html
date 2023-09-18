@@ -1,0 +1,29 @@
+{% extends "services/base.html" %}
+
+{% block content %}
+
+{% for appointment in appointments %}
+<div class="card" style="width: 18rem;">
+    {% if appointment.image %}
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{ appointment.master }}</h5>
+        <p class="card-text">{{ appointment.service|truncatechars:30 }}</p>
+        <p class="card-text">Дата: {{ appointment.appointment_date }}</p>
+        <p class="card-text">Время: {{ appointment.appointment_time }}</p>
+        <a href="{% url 'services:detail_appointment' appointment.id %}" class="btn btn-primary">Читать дальше ...</a>
+      </div>
+    {% else %}
+    <div class="card-body">
+      <h5 class="card-title">{{ appointment.master }}</h5>
+      <p class="card-text">{{ appointment.service|truncatechars:30 }}</p>
+      <p class="card-text">Дата: {{ appointment.appointment_date }}</p>
+      <p class="card-text">Время: {{ appointment.appointment_time }}</p>
+      <a href="{% url 'services:detail_appointment' appointment.id %}" class="btn btn-primary">Читать дальше ...</a>
+    </div>
+  </div>
+    {% endif %}
+    {% empty %}
+    <p>Новостей пока нету :)</p>
+{% endfor %}
+{% endblock content %}

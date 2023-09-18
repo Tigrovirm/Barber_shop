@@ -1,0 +1,25 @@
+{% extends "staffonly/base.html" %}
+
+{% block content %}
+
+{% for post in posts %}
+<div class="card" style="width: 18rem;">
+    {% if post.image %}
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <p class="card-text">{{ post.content|truncatechars:30 }}</p>
+        <a href="{% url 'staffonly:detail_post' post.id %}" class="btn btn-primary">Читать дальше ...</a>
+      </div>
+    {% else %}
+    <div class="card-body">
+      <h5 class="card-title">{{ post.title }}</h5>
+      <p class="card-text">{{ post.content|truncatechars:30 }}</p>
+      <a href="{% url 'staffonly:detail_post' post.id %}" class="btn btn-primary">Читать дальше ...</a>
+    </div>
+  </div>
+    {% endif %}
+    {% empty %}
+    <p>Новостей пока нету :)</p>
+{% endfor %}
+{% endblock content %}
