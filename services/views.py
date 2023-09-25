@@ -2,12 +2,9 @@ from django.shortcuts import render
 from django.views.generic import ListView, CreateView, ListView, TemplateView, UpdateView, DetailView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.utils import timezone
 from .models import Service
 from blog.models import Appointment
-from blog.forms import AppointmentForm
 
-from datetime import date, datetime
 
 class ServicesView(LoginRequiredMixin, TemplateView):
     template_name = "services/title_services.html"

@@ -7,7 +7,9 @@ from .forms import AppointmentForm
 
 from datetime import datetime, date
 from staffonly.models import Post, Master
-from services.models import Service
+from services.models import Service, Client
+
+from telegram.management.commands import bot
 
 # Create your views here.
 
@@ -31,11 +33,17 @@ class ListPosts(ListView):
     context_object_name = "posts"
     template_name = "blog/blog.html"
 
+
 class MakeAppointment(CreateView):
     model = Appointment
     form_class = AppointmentForm
     template_name = "blog/make_appointment.html"
     success_url = reverse_lazy("blog:blog")
+    uniq_id = 555655
+
+    def send_telegram_message(self, uniq_id):
+        client = Client.objects.get(uniq_id=uniq_id)
+        bot.send_message(chat_id = client.telegram_id, text="Вы записались на стрижку")
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -62,7 +70,10 @@ class MakeAppointment(CreateView):
             error_message = 'Выбранное время уже занято.'
             return self.render_to_response(self.get_context_data(form=form, error_message=error_message))
 
-        return super().form_valid(form)
+        responce = super().form_valid(form)
+        self.send_telegram_message(self.uniq_id)
+        return responce
+
 
 
 

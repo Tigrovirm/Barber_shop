@@ -1,5 +1,24 @@
 {% extends "blog/base.html" %}
 
 {% block content %}
-
+    <div id="myDiv">
+        <h2>Главная Страница</h2>
+    </div>
+    <button class = "btn btn-secondary" onclick="changeColor()">Кнопка</button>
+    <script>
+        function changeColor(){
+            var myDiv = document.getElementById("myDiv");
+            if (myDiv.innerText === "Главная Страница"){
+                myDiv.innerText = "Домашняя Страница";
+                myDiv.style.backgroundColor = "#AA0000"
+                var body = document.getElementById('body');
+                body.style.backgroundColor = "#003153"
+            }else if(myDiv.innerText === "Домашняя Страница"){
+                myDiv.innerText = "Главная Страница";
+                myDiv.style.backgroundColor = "#FF0000"
+                var body = document.getElementById('body');
+                body.style.backgroundColor = "#087093"
+            }
+        }
+    </script>
 {% endblock content %}
